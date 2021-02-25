@@ -1,0 +1,3 @@
+mlagents-learn config/dog_cont_no_cur.yaml --run-id dog_cont_no_cur --force --env "..\Standalone\ml agents wrestling.exe" --num-env 6 --no-graphics
+
+mlagents-learn config/dog_cont_no_cur.yaml --run-id dog_cont_no_cur --force
