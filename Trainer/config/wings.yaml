@@ -6,8 +6,8 @@ behaviors:
             buffer_size: 20000
             num_epoch: 4
         network_settings:
-            hidden_units: 300
-            num_layers: 2
+            hidden_units: 500
+            num_layers: 3
 #            memory:
 #                memory_size: 128
 #                sequence_length: 8
