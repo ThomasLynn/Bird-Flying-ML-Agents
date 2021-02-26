@@ -10,17 +10,19 @@ public class BirdAgent : Unity.MLAgents.Agent
 
     public Transform body;
     public List<HingeJoint> joints;
-    public List<Vector3> startingAngles;
-    public List<Vector3> startingAxis;
     public bool printAngles;
 
     private ArenaController parentArena;
     private float distance;
+    private Quaternion startingRot;
+    private bool started = false;
 
     // Start is called before the first frame update
     void Start()
     {
         parentArena = transform.parent.GetComponent<ArenaController>();
+        startingRot = body.rotation;
+        started = true;
     }
 
     public override void OnActionReceived(ActionBuffers actionBuffers)
@@ -33,15 +35,19 @@ public class BirdAgent : Unity.MLAgents.Agent
             joints[i].spring = hingeSpring;
         }
         float newDistance = GetDistance();
-        AddReward((newDistance - distance) * 0.1f); // Scaled to keep the extrinsic value estimate below 1 (should soft-cap at about 0.5
+        AddReward((newDistance - distance) * 0.01f); // Scaled to keep the extrinsic value estimate below 1
         distance = newDistance;
 
-        print(body.rotation.eulerAngles);
-        /*if (body.rotation.eulerAngles.y > 180) // thi checks 90 deg in both directions cus unity weird
+        if (started)
         {
-            EndEpisode();
-            GetParentArena().ResetEnv(gameObject);
-        }*/
+            //print(Quaternion.Angle(body.rotation, startingRot));
+            if (Quaternion.Angle(body.rotation, startingRot) > 90)
+            {
+                AddReward(-0.01f);
+                EndEpisode();
+                GetParentArena().ResetEnv(gameObject);
+            }
+        }
 
         if (body.position.y < 0 || Mathf.Abs(body.position.x) > 100f || Mathf.Abs(body.position.z) > 100f)
         {
@@ -123,6 +129,7 @@ public class BirdAgent : Unity.MLAgents.Agent
 
     public void childCollision(Collision collision)
     {
+        AddReward(-0.01f);
         EndEpisode();
         GetParentArena().ResetEnv(gameObject);
     }
