@@ -9,11 +9,12 @@ public class BirdAgent : Unity.MLAgents.Agent
 {
 
     public Transform body;
-    public List<HingeJoint> joints;
+    public List<ConfigurableJoint> joints;
     public bool printAngles;
 
     private ArenaController parentArena;
     private float distance;
+    private bool distanceSet = false;
     private Quaternion startingRot;
     private bool started = false;
 
@@ -27,15 +28,25 @@ public class BirdAgent : Unity.MLAgents.Agent
 
     public override void OnActionReceived(ActionBuffers actionBuffers)
     {
-        for(int i = 0; i < joints.Count; i++)
+        for (int i = 0; i < joints.Count; i++)
         {
 
-            JointSpring hingeSpring = joints[i].spring;
-            hingeSpring.targetPosition = actionBuffers.ContinuousActions[i] * 45;
-            joints[i].spring = hingeSpring;
+            //JointSpring hingeSpring = joints[i].spring;
+            //hingeSpring.targetPosition = actionBuffers.ContinuousActions[i] * 45;
+            //joints[i].spring = hingeSpring;
+            Quaternion targetAngle = Quaternion.Euler(actionBuffers.ContinuousActions[i * 3] * 45, actionBuffers.ContinuousActions[i * 3 + 1] * 45, actionBuffers.ContinuousActions[i * 3 + 2] * 45);
+            joints[i].targetRotation = targetAngle;
         }
         float newDistance = GetDistance();
-        AddReward((newDistance - distance) * 0.01f); // Scaled to keep the extrinsic value estimate below 1
+        if (distanceSet)
+        {
+            AddReward((newDistance - distance) * 0.01f); // Scaled to keep the extrinsic value estimate below 1
+        }
+        else
+        {
+            distanceSet = true;
+        }
+        
         distance = newDistance;
 
         if (started)
@@ -60,7 +71,7 @@ public class BirdAgent : Unity.MLAgents.Agent
     {
         if (Input.GetKey(KeyCode.W))
         {
-            for (int i = 0; i < joints.Count; i++)
+            for (int i = 0; i < actionsOut.ContinuousActions.Array.Length; i++)
             {
                 //actionsOut.DiscreteActions.Array[i] = 1;
                 actionsOut.ContinuousActions.Array[i] = 1.0f;
@@ -68,7 +79,7 @@ public class BirdAgent : Unity.MLAgents.Agent
         }
         else if (Input.GetKey(KeyCode.S))
         {
-            for (int i = 0; i < joints.Count; i++)
+            for (int i = 0; i < actionsOut.ContinuousActions.Array.Length; i++)
             {
                 //actionsOut.DiscreteActions.Array[i] = -1;
                 actionsOut.ContinuousActions.Array[i] = -1f;
@@ -76,7 +87,7 @@ public class BirdAgent : Unity.MLAgents.Agent
         }
         else
         {
-            for (int i = 0; i < joints.Count; i++)
+            for (int i = 0; i < actionsOut.ContinuousActions.Array.Length; i++)
             {
                 //actionsOut.DiscreteActions.Array[i] = 0;
                 actionsOut.ContinuousActions.Array[i] = 0f;
