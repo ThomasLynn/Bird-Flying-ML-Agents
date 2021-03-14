@@ -10,6 +10,7 @@ public class BirdAgent : Unity.MLAgents.Agent
 
     public Transform body;
     public List<ConfigurableJoint> joints;
+    public List<SimpleWing> liftMultipliers;
     public bool printAngles;
 
     private ArenaController parentArena;
@@ -34,8 +35,12 @@ public class BirdAgent : Unity.MLAgents.Agent
             //JointSpring hingeSpring = joints[i].spring;
             //hingeSpring.targetPosition = actionBuffers.ContinuousActions[i] * 45;
             //joints[i].spring = hingeSpring;
-            Quaternion targetAngle = Quaternion.Euler(actionBuffers.ContinuousActions[i * 3] * 45, actionBuffers.ContinuousActions[i * 3 + 1] * 45, actionBuffers.ContinuousActions[i * 3 + 2] * 45);
+            Quaternion targetAngle = Quaternion.Euler(Mathf.Clamp(actionBuffers.ContinuousActions[i * 3],-1,1) * 45, Mathf.Clamp(actionBuffers.ContinuousActions[i * 3 + 1], -1, 1) * 45, Mathf.Clamp(actionBuffers.ContinuousActions[i * 3 +2], -1, 1) * 45);
             joints[i].targetRotation = targetAngle;
+        }
+        for(int i=0;i < liftMultipliers.Count; i++)
+        {
+            liftMultipliers[i].liftMultiplier = actionBuffers.DiscreteActions[i];
         }
         float newDistance = GetDistance();
         if (distanceSet)
