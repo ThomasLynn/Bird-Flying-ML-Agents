@@ -59,7 +59,7 @@ public class BirdAgent : Unity.MLAgents.Agent
             //print(Quaternion.Angle(body.rotation, startingRot));
             if (Quaternion.Angle(body.rotation, startingRot) > 90)
             {
-                AddReward(-0.01f);
+                AddReward(-0.1f);
                 EndEpisode();
                 GetParentArena().ResetEnv(gameObject);
             }
@@ -102,50 +102,58 @@ public class BirdAgent : Unity.MLAgents.Agent
 
     public override void CollectObservations(VectorSensor sensor)
     {
+        /*print("rotation");
         float x = body.rotation.eulerAngles.x;
         if (x > 180f)
         {
             x -= 360f;
         }
-        x = Mathf.Atan(x / 90f);
-        //Debug.Log("x " + x + " " + body.rotation.eulerAngles.x);
-        sensor.AddObservation(x);
+        sensor.AddObservation(RescaleValue(x, 0, 90, true));
 
         float y = body.rotation.eulerAngles.y;
         if (y > 180f)
         {
             y -= 360f;
         }
-        y = Mathf.Atan(y / 360f);
-        //Debug.Log("y " + y + " " + body.rotation.eulerAngles.y);
-        sensor.AddObservation(y);
+        sensor.AddObservation(RescaleValue(y, 0, 360, true));
 
         float z = body.rotation.eulerAngles.z;
+        print("z " + z);
         if (z > 180f)
         {
             z -= 360f;
         }
-        z = Mathf.Atan(z / 90f);
-        //Debug.Log("z " + z + " " + body.rotation.eulerAngles.z);
-        sensor.AddObservation(z);
+        sensor.AddObservation(RescaleValue(z, 0, 90, true));*/
+        sensor.AddObservation(body.rotation);
 
+        print("speed");
         Vector3 speed = body.InverseTransformDirection(body.GetComponent<Rigidbody>().velocity) / 10f;
-        speed.x = Mathf.Atan(speed.x);
-        speed.y = Mathf.Atan(speed.y);
-        speed.z = Mathf.Atan(speed.z);
-        //print(speed);
-        sensor.AddObservation(speed);
-        Vector3 angularSpeed = body.InverseTransformDirection(body.GetComponent<Rigidbody>().angularVelocity);
-        angularSpeed.x = Mathf.Atan(angularSpeed.x);
-        angularSpeed.y = Mathf.Atan(angularSpeed.y);
-        angularSpeed.z = Mathf.Atan(angularSpeed.z);
-        //print(angularSpeed);
-        sensor.AddObservation(angularSpeed);
+        sensor.AddObservation(RescaleValue(speed.x, 0, 1, true));
+        sensor.AddObservation(RescaleValue(speed.y, 0, 1, true));
+        sensor.AddObservation(RescaleValue(speed.z, 0, 1, true));
+
+        print("angularSpeed");
+        Vector3 angularSpeed = body.GetComponent<Rigidbody>().angularVelocity;
+        sensor.AddObservation(RescaleValue(angularSpeed.x,0,1,true));
+        sensor.AddObservation(RescaleValue(angularSpeed.y,0,1,true));
+        sensor.AddObservation(RescaleValue(angularSpeed.z,0,1,true));
+    }
+
+    // minValue can be the middle value if you want to rescale from -1 to 1
+    private float RescaleValue(float value, float minValue, float maxValue, bool useAtan)
+    {
+        float val = (value - minValue) / (maxValue - minValue);
+        print(val);
+        if (useAtan)
+        {
+            return Mathf.Atan(val) / (Mathf.PI/2f);
+        }
+        return val;
     }
 
     public void childCollision(Collision collision)
     {
-        AddReward(-0.01f);
+        AddReward(-0.1f);
         EndEpisode();
         GetParentArena().ResetEnv(gameObject);
     }
