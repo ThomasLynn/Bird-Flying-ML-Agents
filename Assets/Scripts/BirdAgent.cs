@@ -125,6 +125,8 @@ public class BirdAgent : Unity.MLAgents.Agent
         }
         sensor.AddObservation(RescaleValue(z, 0, 90, true));*/
         sensor.AddObservation(body.rotation);
+        sensor.AddObservation(RescaleValue(body.position.y, 0, 50, true));
+        sensor.AddObservation(RescaleValue(body.position.y, 0, 5, true));
 
         print("speed");
         Vector3 speed = body.InverseTransformDirection(body.GetComponent<Rigidbody>().velocity) / 10f;
@@ -134,9 +136,9 @@ public class BirdAgent : Unity.MLAgents.Agent
 
         print("angularSpeed");
         Vector3 angularSpeed = body.GetComponent<Rigidbody>().angularVelocity;
-        sensor.AddObservation(RescaleValue(angularSpeed.x,0,1,true));
-        sensor.AddObservation(RescaleValue(angularSpeed.y,0,1,true));
-        sensor.AddObservation(RescaleValue(angularSpeed.z,0,1,true));
+        sensor.AddObservation(RescaleValue(angularSpeed.x,0,5,true));
+        sensor.AddObservation(RescaleValue(angularSpeed.y,0,5,true));
+        sensor.AddObservation(RescaleValue(angularSpeed.z,0,5,true));
     }
 
     // minValue can be the middle value if you want to rescale from -1 to 1

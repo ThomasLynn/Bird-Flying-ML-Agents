@@ -28,7 +28,7 @@ public class ArenaController : MonoBehaviour
         //Debug.Log(currentDogCount+" "+ number);
         for (int j = agents.Count; j < maxAgents; j++)
         {
-            GameObject go = Instantiate(agentPrefab, new Vector3(0,40,-30), Quaternion.identity, transform) as GameObject;
+            GameObject go = Instantiate(agentPrefab, new Vector3(0,40,-80), Quaternion.identity, transform) as GameObject;
             //go.GetComponent<DogAgent>().SetRandomTarget(true);
             agents.Add(go);
         }
