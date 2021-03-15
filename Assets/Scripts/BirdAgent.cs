@@ -11,6 +11,8 @@ public class BirdAgent : Unity.MLAgents.Agent
     public Transform body;
     public List<ConfigurableJoint> joints;
     public List<SimpleWing> liftMultipliers;
+    public AudioSource flappingAudio;
+    public AudioSource chirpingAudio;
     public bool printAngles;
 
     private ArenaController parentArena;
@@ -25,10 +27,13 @@ public class BirdAgent : Unity.MLAgents.Agent
         parentArena = transform.parent.GetComponent<ArenaController>();
         startingRot = body.rotation;
         started = true;
+        flappingAudio.PlayDelayed(Random.Range(0f, 5f));
+        chirpingAudio.PlayDelayed(Random.Range(1f, 20f));
     }
 
     public override void OnActionReceived(ActionBuffers actionBuffers)
     {
+
         for (int i = 0; i < joints.Count; i++)
         {
 
@@ -128,13 +133,13 @@ public class BirdAgent : Unity.MLAgents.Agent
         sensor.AddObservation(RescaleValue(body.position.y, 0, 50, true));
         sensor.AddObservation(RescaleValue(body.position.y, 0, 5, true));
 
-        print("speed");
+        //print("speed");
         Vector3 speed = body.InverseTransformDirection(body.GetComponent<Rigidbody>().velocity) / 10f;
         sensor.AddObservation(RescaleValue(speed.x, 0, 1, true));
         sensor.AddObservation(RescaleValue(speed.y, 0, 1, true));
         sensor.AddObservation(RescaleValue(speed.z, 0, 1, true));
 
-        print("angularSpeed");
+        //print("angularSpeed");
         Vector3 angularSpeed = body.GetComponent<Rigidbody>().angularVelocity;
         sensor.AddObservation(RescaleValue(angularSpeed.x,0,5,true));
         sensor.AddObservation(RescaleValue(angularSpeed.y,0,5,true));
@@ -145,7 +150,7 @@ public class BirdAgent : Unity.MLAgents.Agent
     private float RescaleValue(float value, float minValue, float maxValue, bool useAtan)
     {
         float val = (value - minValue) / (maxValue - minValue);
-        print(val);
+        //print(val);
         if (useAtan)
         {
             return Mathf.Atan(val) / (Mathf.PI/2f);
