@@ -14,6 +14,8 @@ public class BirdAgent : Unity.MLAgents.Agent
     public AudioSource flappingAudio;
     public AudioSource chirpingAudio;
     public bool printAngles;
+    public bool flingAtStart;
+    public bool disableWings;
 
     private ArenaController parentArena;
     private float distance;
@@ -27,8 +29,15 @@ public class BirdAgent : Unity.MLAgents.Agent
         parentArena = transform.parent.GetComponent<ArenaController>();
         startingRot = body.rotation;
         started = true;
-        flappingAudio.PlayDelayed(Random.Range(0f, 5f));
-        chirpingAudio.PlayDelayed(Random.Range(1f, 20f));
+        if (Application.isEditor)
+        {
+            flappingAudio.PlayDelayed(Random.Range(0f, 5f));
+            chirpingAudio.PlayDelayed(Random.Range(1f, 20f));
+        }
+        if (flingAtStart)
+        {
+            body.GetComponent<Rigidbody>().velocity = new Vector3(0, 10, 20);
+        }
     }
 
     public override void OnActionReceived(ActionBuffers actionBuffers)
@@ -45,7 +54,14 @@ public class BirdAgent : Unity.MLAgents.Agent
         }
         for(int i=0;i < liftMultipliers.Count; i++)
         {
-            liftMultipliers[i].liftMultiplier = actionBuffers.DiscreteActions[i];
+            if (disableWings)
+            {
+                liftMultipliers[i].liftMultiplier = 0;
+            }
+            else
+            {
+                liftMultipliers[i].liftMultiplier = actionBuffers.DiscreteActions[i];
+            }
         }
         float newDistance = GetDistance();
         if (distanceSet)
