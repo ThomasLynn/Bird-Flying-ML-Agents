@@ -123,28 +123,6 @@ public class BirdAgent : Unity.MLAgents.Agent
 
     public override void CollectObservations(VectorSensor sensor)
     {
-        /*print("rotation");
-        float x = body.rotation.eulerAngles.x;
-        if (x > 180f)
-        {
-            x -= 360f;
-        }
-        sensor.AddObservation(RescaleValue(x, 0, 90, true));
-
-        float y = body.rotation.eulerAngles.y;
-        if (y > 180f)
-        {
-            y -= 360f;
-        }
-        sensor.AddObservation(RescaleValue(y, 0, 360, true));
-
-        float z = body.rotation.eulerAngles.z;
-        print("z " + z);
-        if (z > 180f)
-        {
-            z -= 360f;
-        }
-        sensor.AddObservation(RescaleValue(z, 0, 90, true));*/
         sensor.AddObservation(body.rotation);
         sensor.AddObservation(RescaleValue(body.position.y, 0, 50, true));
         sensor.AddObservation(RescaleValue(body.position.y, 0, 5, true));
