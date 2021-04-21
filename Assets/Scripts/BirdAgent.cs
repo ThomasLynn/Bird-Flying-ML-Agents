@@ -16,6 +16,7 @@ public class BirdAgent : Unity.MLAgents.Agent
     public bool printAngles;
     public bool flingAtStart;
     public bool disableWings;
+    public bool respawnOnHit;
 
     private ArenaController parentArena;
     private float distance;
@@ -154,9 +155,12 @@ public class BirdAgent : Unity.MLAgents.Agent
 
     public void childCollision(Collision collision)
     {
-        AddReward(-0.1f);
-        EndEpisode();
-        GetParentArena().ResetEnv(gameObject);
+        if (respawnOnHit)
+        {
+            AddReward(-0.1f);
+            EndEpisode();
+            GetParentArena().ResetEnv(gameObject);
+        }
     }
 
     public float GetDistance()
