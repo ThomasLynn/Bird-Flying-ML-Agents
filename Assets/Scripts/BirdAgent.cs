@@ -18,16 +18,15 @@ public class BirdAgent : Unity.MLAgents.Agent
     public bool disableWings;
     public bool respawnOnHit;
 
-    private ArenaController parentArena;
     private float distance;
     private bool distanceSet = false;
     private Quaternion startingRot;
     private bool started = false;
+    private Transform targetTransform;
 
     // Start is called before the first frame update
     void Start()
     {
-        parentArena = transform.parent.GetComponent<ArenaController>();
         startingRot = body.rotation;
         started = true;
         if (Application.isEditor)
@@ -87,7 +86,7 @@ public class BirdAgent : Unity.MLAgents.Agent
             }
         }
 
-        if (body.position.y < 0 || Mathf.Abs(body.position.x) > 100f || Mathf.Abs(body.position.z) > 100f)
+        if (body.position.y < 0 || Mathf.Abs(body.position.x) > 100f || Mathf.Abs(body.position.z) > 50f)
         {
             EndEpisode();
             GetParentArena().ResetEnv(gameObject);
@@ -170,6 +169,11 @@ public class BirdAgent : Unity.MLAgents.Agent
 
     public ArenaController GetParentArena()
     {
-        return parentArena;
+        return transform.parent.GetComponent<ArenaController>(); ;
+    }
+
+    public void SetTarget(Transform target)
+    {
+        targetTransform = target;
     }
 }

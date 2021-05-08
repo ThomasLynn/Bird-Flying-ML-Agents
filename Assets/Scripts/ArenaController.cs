@@ -5,7 +5,7 @@ using UnityEngine;
 public class ArenaController : MonoBehaviour
 {
     public GameObject agentPrefab;
-    public Transform spawnPoint;
+    public List<Transform> spawnPoints;
     public int maxAgents;
 
     private List<GameObject> agents;
@@ -28,7 +28,9 @@ public class ArenaController : MonoBehaviour
         //Debug.Log(currentDogCount+" "+ number);
         for (int j = agents.Count; j < maxAgents; j++)
         {
-            GameObject go = Instantiate(agentPrefab, spawnPoint.position, Quaternion.identity, transform) as GameObject;
+            int spawnNumber = Random.Range(0, spawnPoints.Count);
+            GameObject go = Instantiate(agentPrefab, spawnPoints[spawnNumber].position, Quaternion.identity, transform) as GameObject;
+            go.GetComponent<BirdAgent>().SetTarget(spawnPoints[(spawnNumber+1)% spawnPoints.Count]);
             //go.GetComponent<DogAgent>().SetRandomTarget(true);
             agents.Add(go);
         }
