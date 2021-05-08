@@ -9,6 +9,6 @@ EditorBuildSettings:
     path: Assets/SimpleWings/Demo/Scenes/Plane.unity
     guid: d03093aa1e993874f925ed4a22e88126
   - enabled: 1
-    path: Assets/Scenes/WingsScene.unity
+    path: Assets/Scenes/WingsSceneObstacles.unity
     guid: ee597bd3da5669f4790a7652060dc198
   m_configObjects: {}

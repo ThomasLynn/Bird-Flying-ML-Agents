@@ -86,7 +86,7 @@ public class BirdAgent : Unity.MLAgents.Agent
             }
         }
 
-        if (body.position.y < 0 || Mathf.Abs(body.position.x) > 100f || Mathf.Abs(body.position.z) > 50f)
+        if (body.position.y < 0 || Mathf.Abs(body.position.x) > 100f || Mathf.Abs(body.position.z) > 100f)
         {
             EndEpisode();
             GetParentArena().ResetEnv(gameObject);
