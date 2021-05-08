@@ -23,6 +23,7 @@ public class BirdAgent : Unity.MLAgents.Agent
     private Quaternion startingRot;
     private bool started = false;
     private Transform targetTransform;
+    private int targetNumber;
 
     // Start is called before the first frame update
     void Start()
@@ -64,18 +65,25 @@ public class BirdAgent : Unity.MLAgents.Agent
             }
         }
         float newDistance = GetDistance();
-        if (distanceSet)
+        if (newDistance < 5)
         {
-            AddReward((newDistance - distance) * 0.01f); // Scaled to keep the extrinsic value estimate below 1
+            NextTarget();
         }
         else
         {
-            distanceSet = true;
+            if (distanceSet)
+            {
+                AddReward((distance - newDistance) * 0.01f); // Scaled to keep the extrinsic value estimate below 1
+            }
+            else
+            {
+                distanceSet = true;
+            }
         }
-        
         distance = newDistance;
 
-        if (started)
+
+        /*if (started)
         {
             //print(Quaternion.Angle(body.rotation, startingRot));
             if (Quaternion.Angle(body.rotation, startingRot) > 90)
@@ -84,7 +92,7 @@ public class BirdAgent : Unity.MLAgents.Agent
                 EndEpisode();
                 GetParentArena().ResetEnv(gameObject);
             }
-        }
+        }*/
 
         if (body.position.y < 0 || Mathf.Abs(body.position.x) > 100f || Mathf.Abs(body.position.z) > 100f)
         {
@@ -123,7 +131,8 @@ public class BirdAgent : Unity.MLAgents.Agent
 
     public override void CollectObservations(VectorSensor sensor)
     {
-        sensor.AddObservation(body.rotation);
+        //sensor.AddObservation(body.rotation);
+        sensor.AddObservation(Quaternion.LookRotation(targetTransform.position-targetTransform.position));
         sensor.AddObservation(RescaleValue(body.position.y, 0, 50, true));
         sensor.AddObservation(RescaleValue(body.position.y, 0, 5, true));
 
@@ -164,7 +173,8 @@ public class BirdAgent : Unity.MLAgents.Agent
 
     public float GetDistance()
     {
-        return body.position.z;
+        //return body.position.z;
+        return (targetTransform.position - transform.position).magnitude;
     }
 
     public ArenaController GetParentArena()
@@ -172,8 +182,15 @@ public class BirdAgent : Unity.MLAgents.Agent
         return transform.parent.GetComponent<ArenaController>(); ;
     }
 
-    public void SetTarget(Transform target)
+    public void SetTarget(int localTargetNumber)
     {
-        targetTransform = target;
+        localTargetNumber = (localTargetNumber + 1) % GetParentArena().spawnPoints.Count;
+        targetNumber = localTargetNumber;
+        targetTransform = GetParentArena().spawnPoints[localTargetNumber];
+    }
+
+    public void NextTarget()
+    {
+        SetTarget(targetNumber + 1);
     }
 }

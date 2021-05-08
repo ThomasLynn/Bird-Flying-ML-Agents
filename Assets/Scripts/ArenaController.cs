@@ -30,7 +30,7 @@ public class ArenaController : MonoBehaviour
         {
             int spawnNumber = Random.Range(0, spawnPoints.Count);
             GameObject go = Instantiate(agentPrefab, spawnPoints[spawnNumber].position, Quaternion.identity, transform) as GameObject;
-            go.GetComponent<BirdAgent>().SetTarget(spawnPoints[(spawnNumber+1)% spawnPoints.Count]);
+            go.GetComponent<BirdAgent>().SetTarget(spawnNumber+1);
             //go.GetComponent<DogAgent>().SetRandomTarget(true);
             agents.Add(go);
         }

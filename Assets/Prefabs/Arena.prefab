@@ -115,9 +115,9 @@ GameObject:
   - component: {fileID: 716091510208989669}
   - component: {fileID: 7632215104830507191}
   - component: {fileID: 6140958432969411403}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Ground
-  m_TagString: Untagged
+  m_TagString: Arena
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

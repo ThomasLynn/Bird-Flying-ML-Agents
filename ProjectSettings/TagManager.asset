@@ -3,7 +3,10 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Obstacle
+  - Hoop
+  - Arena
   layers:
   - Default
   - TransparentFX
@@ -13,8 +16,8 @@ TagManager:
   - UI
   - Bird
   - Spawn
-  - 
-  - 
+  - Hoop
+  - Obstacle
   - 
   - 
   - 
