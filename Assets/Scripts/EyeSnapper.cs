@@ -5,7 +5,7 @@ using UnityEngine;
 public class EyeSnapper : MonoBehaviour
 {
 
-    public Transform trackedTransform;
+    public Rigidbody trackedTransform;
 
     // Start is called before the first frame update
     void Start()
@@ -20,6 +20,7 @@ public class EyeSnapper : MonoBehaviour
         Quaternion quat = transform.rotation;
         Vector3 angles = quat.eulerAngles;
         angles.y = trackedTransform.rotation.eulerAngles.y;
+        quat.eulerAngles = angles;
         transform.rotation = quat;
     }
 }

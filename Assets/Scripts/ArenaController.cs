@@ -29,7 +29,8 @@ public class ArenaController : MonoBehaviour
         for (int j = agents.Count; j < maxAgents; j++)
         {
             int spawnNumber = Random.Range(0, spawnPoints.Count);
-            GameObject go = Instantiate(agentPrefab, spawnPoints[spawnNumber].position, Quaternion.identity, transform) as GameObject;
+            Quaternion direction = Quaternion.LookRotation(spawnPoints[(spawnNumber + 1) % spawnPoints.Count].position - spawnPoints[spawnNumber].position);
+            GameObject go = Instantiate(agentPrefab, spawnPoints[spawnNumber].position, direction, transform) as GameObject;
             go.GetComponent<BirdAgent>().SetTarget(spawnNumber+1);
             //go.GetComponent<DogAgent>().SetRandomTarget(true);
             agents.Add(go);

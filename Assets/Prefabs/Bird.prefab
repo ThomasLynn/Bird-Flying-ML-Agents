@@ -133,7 +133,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d848cb55ca561b948bd0c89bd6dede8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  trackedTransform: {fileID: 8676827893397645757}
+  trackedTransform: {fileID: 7931921673649769306}
 --- !u!1 &3036237286437865303
 GameObject:
   m_ObjectHideFlags: 0
@@ -369,7 +369,7 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 5022602860645237092, guid: e9d05fe90288910489eacb04b3f35dc7, type: 3}
+  m_Model: {fileID: 5022602860645237092, guid: 996c675e7f2b7884694fa336bb6b0f13, type: 3}
   m_InferenceDevice: 0
   m_BehaviorType: 0
   m_BehaviorName: Agent
