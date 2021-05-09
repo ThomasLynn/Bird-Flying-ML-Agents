@@ -77,7 +77,7 @@ public class BirdAgent : Unity.MLAgents.Agent
                 AddReward((distance - newDistance) * 0.01f); // Scaled to keep the extrinsic value estimate below 1
                 if (bestDistance + 1 < newDistance)
                 {
-                    //AddReward(-0.1f);
+                    AddReward(-0.1f);
                     EndEpisode();
                     GetParentArena().ResetEnv(gameObject);
                 }
@@ -177,7 +177,7 @@ public class BirdAgent : Unity.MLAgents.Agent
     {
         if (respawnOnHit)
         {
-            AddReward(-0.1f);
+            //AddReward(-0.1f);
             EndEpisode();
             GetParentArena().ResetEnv(gameObject);
         }
@@ -197,13 +197,13 @@ public class BirdAgent : Unity.MLAgents.Agent
 
     public void SetTarget(int localTargetNumber)
     {
-        localTargetNumber = (localTargetNumber + 1) % GetParentArena().spawnPoints.Count;
+        localTargetNumber = (localTargetNumber) % GetParentArena().spawnPoints.Count;
         targetNumber = localTargetNumber;
         targetTransform = GetParentArena().spawnPoints[localTargetNumber];
     }
 
     public void NextTarget()
     {
-        SetTarget(targetNumber + 1);
+        SetTarget(targetNumber+1);
     }
 }
