@@ -62,7 +62,7 @@ public class BirdAgent : Unity.MLAgents.Agent
             }
             else
             {
-                liftMultipliers[i].liftMultiplier = actionBuffers.DiscreteActions[i];
+                liftMultipliers[i].liftMultiplier = actionBuffers.DiscreteActions[i]*0.9f;
             }
         }
         float newDistance = GetDistance();
