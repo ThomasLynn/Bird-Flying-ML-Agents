@@ -1,0 +1,3 @@
+The code and assests in this folder is under MIT License, Copyright (c) 2017 Brian Hernandez.
+
+Original code can be found here: https://github.com/brihernandez/SimpleWings
