@@ -5,6 +5,7 @@ behaviors:
             batch_size: 2000
             buffer_size: 20000
             num_epoch: 4
+            beta: 1e-4
         network_settings:
             hidden_units: 500
             num_layers: 3
