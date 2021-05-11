@@ -22,7 +22,6 @@ public class BirdAgent : Unity.MLAgents.Agent
     private float bestDistance;
     private bool distanceSet = false;
     private Quaternion startingRot;
-    private bool started = false;
     private Transform targetTransform;
     private int targetNumber;
 
@@ -30,7 +29,6 @@ public class BirdAgent : Unity.MLAgents.Agent
     void Start()
     {
         startingRot = body.rotation;
-        started = true;
         if (Application.isEditor)
         {
             flappingAudio.PlayDelayed(Random.Range(0f, 5f));
@@ -144,7 +142,11 @@ public class BirdAgent : Unity.MLAgents.Agent
     public override void CollectObservations(VectorSensor sensor)
     {
         //sensor.AddObservation(body.rotation);
-        sensor.AddObservation(Quaternion.LookRotation(targetTransform.position-transform.position));
+        sensor.AddObservation(Quaternion.LookRotation(targetTransform.position-body.position));
+        sensor.AddObservation(Mathf.Sin(body.rotation.eulerAngles.x * Mathf.Deg2Rad));
+        sensor.AddObservation(Mathf.Cos(body.rotation.eulerAngles.x * Mathf.Deg2Rad));
+        sensor.AddObservation(Mathf.Sin(body.rotation.eulerAngles.z * Mathf.Deg2Rad));
+        sensor.AddObservation(Mathf.Cos(body.rotation.eulerAngles.z * Mathf.Deg2Rad));
         sensor.AddObservation(RescaleValue(body.position.y, 0, 50, true));
         sensor.AddObservation(RescaleValue(body.position.y, 0, 5, true));
 
