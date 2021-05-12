@@ -131,7 +131,7 @@ MonoBehaviour:
   applyForcesToCenter: 0
   wing: {fileID: 11400000, guid: 2fc359bcb3685f54ca7343cac8d7ab59, type: 2}
   liftMultiplier: 1
-  dragMultiplier: 0
+  dragMultiplier: 0.1
 --- !u!114 &5511987565547518869
 MonoBehaviour:
   m_ObjectHideFlags: 0
