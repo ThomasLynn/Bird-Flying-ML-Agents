@@ -76,6 +76,7 @@ public class BirdAgent : Unity.MLAgents.Agent
         }
         if (newDistance < 5)
         {
+            AddReward(0.1f);
             NextTarget();
         }
         else
@@ -213,6 +214,7 @@ public class BirdAgent : Unity.MLAgents.Agent
         localTargetNumber = (localTargetNumber) % GetParentArena().spawnPoints.Count;
         targetNumber = localTargetNumber;
         targetTransform = GetParentArena().spawnPoints[localTargetNumber];
+        distance = GetDistance();
     }
 
     public void NextTarget()
