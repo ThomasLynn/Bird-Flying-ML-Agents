@@ -69,7 +69,7 @@ public class BirdAgent : Unity.MLAgents.Agent
         float newDistance = GetDistance();
         if (passedThreshold == true)
         {
-            if (newDistance < bestDistance)
+            if (newDistance < bestDistance-1)
             {
                 passedThreshold = false;
             }
