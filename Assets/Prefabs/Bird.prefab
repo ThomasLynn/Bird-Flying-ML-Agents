@@ -51,8 +51,8 @@ MonoBehaviour:
   - Obstacle
   - Hoop
   - Arena
-  m_RaysPerDirection: 3
-  m_MaxRayDegrees: 70
+  m_RaysPerDirection: 4
+  m_MaxRayDegrees: 110
   m_SphereCastRadius: 0.5
   m_RayLength: 30
   m_RayLayerMask:
@@ -80,8 +80,8 @@ MonoBehaviour:
   - Obstacle
   - Hoop
   - Arena
-  m_RaysPerDirection: 3
-  m_MaxRayDegrees: 70
+  m_RaysPerDirection: 4
+  m_MaxRayDegrees: 110
   m_SphereCastRadius: 0.5
   m_RayLength: 30
   m_RayLayerMask:
@@ -109,8 +109,8 @@ MonoBehaviour:
   - Obstacle
   - Hoop
   - Arena
-  m_RaysPerDirection: 3
-  m_MaxRayDegrees: 70
+  m_RaysPerDirection: 4
+  m_MaxRayDegrees: 110
   m_SphereCastRadius: 0.5
   m_RayLength: 30
   m_RayLayerMask:
@@ -360,8 +360,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    VectorObservationSize: 12
-    NumStackedVectorObservations: 7
+    VectorObservationSize: 16
+    NumStackedVectorObservations: 4
     m_ActionSpec:
       m_NumContinuousActions: 24
       BranchSizes: 0200000002000000020000000200000002000000020000000200000002000000
