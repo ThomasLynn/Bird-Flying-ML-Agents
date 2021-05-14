@@ -67,11 +67,11 @@ public class BirdAgent : Unity.MLAgents.Agent
             }
         }
         float newDistance = GetDistance();
-        if (passedThreshold == false)
+        if (passedThreshold == true)
         {
-            if (newDistance < startingDistance - 5)
+            if (newDistance < bestDistance)
             {
-                passedThreshold = true;
+                passedThreshold = false;
             }
         }
         if (newDistance < 5)
@@ -84,7 +84,7 @@ public class BirdAgent : Unity.MLAgents.Agent
             if (distanceSet)
             {
                 AddReward((distance - newDistance) * 0.01f); // Scaled to keep the extrinsic value estimate below 1
-                if (passedThreshold == false && bestDistance + 1 < newDistance)
+                if (passedThreshold == false && bestDistance + 0.2 < newDistance)
                 {
                     AddReward(-0.1f);
                     EndEpisode();
@@ -224,6 +224,8 @@ public class BirdAgent : Unity.MLAgents.Agent
         targetNumber = localTargetNumber;
         targetTransform = GetParentArena().spawnPoints[localTargetNumber];
         distance = GetDistance();
+        bestDistance = distance;
+        passedThreshold = true;
     }
 
     public void NextTarget()
