@@ -154,7 +154,16 @@ public class BirdAgent : Unity.MLAgents.Agent
     public override void CollectObservations(VectorSensor sensor)
     {
         //sensor.AddObservation(body.rotation);
-        sensor.AddObservation(Quaternion.LookRotation(targetTransform.position-body.position));
+        Vector3 relativeTargetPosition = targetTransform.position - body.position;
+        Quaternion targetRot = Quaternion.LookRotation(relativeTargetPosition);
+        sensor.AddObservation(targetRot);
+
+        Vector3 relativeTargetDirection = body.InverseTransformDirection(relativeTargetPosition);
+        //print(relativeTargetDirection);
+        sensor.AddObservation(RescaleValue(relativeTargetDirection.x, 0, 40, true));
+        sensor.AddObservation(RescaleValue(relativeTargetDirection.y, 0, 40, true));
+        sensor.AddObservation(RescaleValue(relativeTargetDirection.z, 0, 40, true));
+
         sensor.AddObservation(Mathf.Sin(body.rotation.eulerAngles.x * Mathf.Deg2Rad));
         sensor.AddObservation(Mathf.Cos(body.rotation.eulerAngles.x * Mathf.Deg2Rad));
         sensor.AddObservation(Mathf.Sin(body.rotation.eulerAngles.z * Mathf.Deg2Rad));
