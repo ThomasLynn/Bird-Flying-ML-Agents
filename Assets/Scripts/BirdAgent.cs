@@ -20,7 +20,9 @@ public class BirdAgent : Unity.MLAgents.Agent
 
     private float distance;
     private float bestDistance;
+    private float startingDistance;
     private bool distanceSet = false;
+    private bool passedThreshold = false;
     private Quaternion startingRot;
     private Transform targetTransform;
     private int targetNumber;
@@ -29,6 +31,7 @@ public class BirdAgent : Unity.MLAgents.Agent
     void Start()
     {
         startingRot = body.rotation;
+        startingDistance = GetDistance();
         if (Application.isEditor)
         {
             flappingAudio.PlayDelayed(Random.Range(0f, 5f));
@@ -64,6 +67,13 @@ public class BirdAgent : Unity.MLAgents.Agent
             }
         }
         float newDistance = GetDistance();
+        if (passedThreshold == false)
+        {
+            if (newDistance < startingDistance - 5)
+            {
+                passedThreshold = true;
+            }
+        }
         if (newDistance < 5)
         {
             NextTarget();
@@ -73,7 +83,7 @@ public class BirdAgent : Unity.MLAgents.Agent
             if (distanceSet)
             {
                 AddReward((distance - newDistance) * 0.01f); // Scaled to keep the extrinsic value estimate below 1
-                if (bestDistance + 1 < newDistance)
+                if (passedThreshold == false && bestDistance + 1 < newDistance)
                 {
                     AddReward(-0.1f);
                     EndEpisode();
@@ -104,8 +114,9 @@ public class BirdAgent : Unity.MLAgents.Agent
             }
         }*/
 
-        if (body.position.y < 0 || body.position.y > 50 || Mathf.Abs(body.position.x) > 100f || Mathf.Abs(body.position.z) > 100f)
+        if (body.position.y < -1 || body.position.y > 50 || Mathf.Abs(body.position.x) > 100f || Mathf.Abs(body.position.z) > 100f)
         {
+            SetReward(0);
             EndEpisode();
             GetParentArena().ResetEnv(gameObject);
         }
@@ -179,7 +190,7 @@ public class BirdAgent : Unity.MLAgents.Agent
     {
         if (respawnOnHit)
         {
-            //AddReward(-0.1f);
+            AddReward(-0.1f);
             EndEpisode();
             GetParentArena().ResetEnv(gameObject);
         }
