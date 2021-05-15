@@ -44,7 +44,6 @@ public class BirdAgent : Unity.MLAgents.Agent
 
     public override void OnActionReceived(ActionBuffers actionBuffers)
     {
-        AddReward(1f / MaxStep);
 
         for (int i = 0; i < joints.Count; i++)
         {
