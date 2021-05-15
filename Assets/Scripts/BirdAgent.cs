@@ -22,7 +22,6 @@ public class BirdAgent : Unity.MLAgents.Agent
     private float bestDistance;
     private float startingDistance;
     private bool distanceSet = false;
-    private bool passedThreshold = false;
     private Quaternion startingRot;
     private Transform targetTransform;
     private int targetNumber;
@@ -45,6 +44,7 @@ public class BirdAgent : Unity.MLAgents.Agent
 
     public override void OnActionReceived(ActionBuffers actionBuffers)
     {
+        AddReward(1f / MaxStep);
 
         for (int i = 0; i < joints.Count; i++)
         {
@@ -67,17 +67,12 @@ public class BirdAgent : Unity.MLAgents.Agent
             }
         }
         float newDistance = GetDistance();
-        /*if (passedThreshold == true)
-        {
-            if (newDistance < bestDistance-1)
-            {
-                passedThreshold = false;
-            }
-        }*/
+        print("new distance " + newDistance);
         if (newDistance < 5)
         {
             AddReward(0.3f);
             EndEpisode();
+            GetParentArena().ResetEnv(gameObject);
             //NextTarget();
         }
         else
@@ -85,7 +80,7 @@ public class BirdAgent : Unity.MLAgents.Agent
             if (distanceSet)
             {
                 AddReward((distance - newDistance) * 0.01f); // Scaled to keep the extrinsic value estimate below 1
-                if (passedThreshold == false && bestDistance + 0.2 < newDistance)
+                if (bestDistance + 0.2 < newDistance)
                 {
                     AddReward(-0.1f);
                     EndEpisode();
@@ -103,18 +98,6 @@ public class BirdAgent : Unity.MLAgents.Agent
         {
             bestDistance = distance;
         }
-
-
-        /*if (started)
-        {
-            //print(Quaternion.Angle(body.rotation, startingRot));
-            if (Quaternion.Angle(body.rotation, startingRot) > 90)
-            {
-                AddReward(-0.1f);
-                EndEpisode();
-                GetParentArena().ResetEnv(gameObject);
-            }
-        }*/
 
         if (body.position.y < -1 || body.position.y > 50 || Mathf.Abs(body.position.x) > 100f || Mathf.Abs(body.position.z) > 100f)
         {
@@ -226,11 +209,5 @@ public class BirdAgent : Unity.MLAgents.Agent
         targetTransform = GetParentArena().spawnPoints[localTargetNumber];
         distance = GetDistance();
         bestDistance = distance;
-    }
-
-    public void NextTarget()
-    {
-        SetTarget(targetNumber+1);
-        passedThreshold = true;
     }
 }
