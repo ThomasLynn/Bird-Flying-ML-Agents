@@ -33,8 +33,12 @@ public class BirdAgent : Unity.MLAgents.Agent
         startingDistance = GetDistance();
         if (Application.isEditor)
         {
-            flappingAudio.PlayDelayed(Random.Range(0f, 5f));
-            chirpingAudio.PlayDelayed(Random.Range(1f, 20f));
+            CameraMoverScript cameraScript = Camera.main.GetComponent<CameraMoverScript>();
+            if (cameraScript.birdTarget == -1 || cameraScript.birdTarget == targetNumber)
+            {
+                flappingAudio.PlayDelayed(Random.Range(0f, 5f));
+                chirpingAudio.PlayDelayed(Random.Range(1f, 20f));
+            }
         }
         if (flingAtStart)
         {
@@ -66,7 +70,7 @@ public class BirdAgent : Unity.MLAgents.Agent
             }
         }
         float newDistance = GetDistance();
-        print("new distance " + newDistance);
+        //print("new distance " + newDistance);
         if (newDistance < 5)
         {
             AddReward(0.3f);
