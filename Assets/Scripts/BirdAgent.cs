@@ -102,7 +102,7 @@ public class BirdAgent : Unity.MLAgents.Agent
             bestDistance = distance;
         }
 
-        if (body.position.y < -1 || body.position.y > 50 || Mathf.Abs(body.position.x) > 100f || Mathf.Abs(body.position.z) > 100f)
+        if (body.position.y < -1 || body.position.y > 50 || Mathf.Abs(body.position.x) > 150f || Mathf.Abs(body.position.z) > 150f)
         {
             SetReward(0);
             EndEpisode();
