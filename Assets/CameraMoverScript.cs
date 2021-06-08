@@ -7,6 +7,7 @@ public class CameraMoverScript : MonoBehaviour
 
     public List<Vector3> positions;
     public List<Quaternion> rotations;
+    public List<int> target;
     public bool follow;
 
     [HideInInspector]
@@ -36,41 +37,55 @@ public class CameraMoverScript : MonoBehaviour
         {
             targetPosition = positions[0];
             targetRotation = rotations[0];
+            birdTarget = target[0];
             moveSpeed = (transform.position - targetPosition).magnitude;
             rotSpeed = Quaternion.Angle(transform.rotation, targetRotation);
-            birdTarget = -1;
+            //birdTarget = -1;
         }
         if (Input.GetKeyDown("2"))
         {
             targetPosition = positions[1];
             targetRotation = rotations[1];
+            birdTarget = target[1];
             moveSpeed = (transform.position - targetPosition).magnitude;
             rotSpeed = Quaternion.Angle(transform.rotation, targetRotation);
-            birdTarget = 1;
+            //birdTarget = 1;
         }
         if (Input.GetKeyDown("3"))
         {
             targetPosition = positions[2];
             targetRotation = rotations[2];
+            birdTarget = target[2];
             moveSpeed = (transform.position - targetPosition).magnitude;
             rotSpeed = Quaternion.Angle(transform.rotation, targetRotation);
-            birdTarget = 1;
+            //birdTarget = 1;
         }
         if (Input.GetKeyDown("4"))
         {
             targetPosition = positions[3];
             targetRotation = rotations[3];
+            birdTarget = target[3];
             moveSpeed = (transform.position - targetPosition).magnitude;
             rotSpeed = Quaternion.Angle(transform.rotation, targetRotation);
-            birdTarget = 0;
+            //birdTarget = 0;
         }
         if (Input.GetKeyDown("5"))
         {
             targetPosition = positions[4];
             targetRotation = rotations[4];
+            birdTarget = target[4];
             moveSpeed = (transform.position - targetPosition).magnitude;
             rotSpeed = Quaternion.Angle(transform.rotation, targetRotation);
-            birdTarget = 2;
+            //birdTarget = 2;
+        }
+        if (Input.GetKeyDown("6"))
+        {
+            targetPosition = positions[5];
+            targetRotation = rotations[5];
+            birdTarget = target[5];
+            moveSpeed = (transform.position - targetPosition).magnitude;
+            rotSpeed = Quaternion.Angle(transform.rotation, targetRotation);
+            //birdTarget = 2;
         }
         if (follow) {
             transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * 2 * Time.deltaTime);

@@ -33,12 +33,12 @@ public class BirdAgent : Unity.MLAgents.Agent
         startingDistance = GetDistance();
         if (Application.isEditor)
         {
-            CameraMoverScript cameraScript = Camera.main.GetComponent<CameraMoverScript>();
-            if (cameraScript.birdTarget == -1 || cameraScript.birdTarget == targetNumber)
-            {
+            //CameraMoverScript cameraScript = Camera.main.GetComponent<CameraMoverScript>();
+            //if (cameraScript.birdTarget == -1 || cameraScript.birdTarget == targetNumber)
+            //{
                 flappingAudio.PlayDelayed(Random.Range(0f, 5f));
                 chirpingAudio.PlayDelayed(Random.Range(1f, 20f));
-            }
+            //}
         }
         if (flingAtStart)
         {
