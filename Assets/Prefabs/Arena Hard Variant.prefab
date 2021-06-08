@@ -677,6 +677,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4239891054408888919, guid: 20fff83d3fb568d42855163d1f50b788,
         type: 3}
+      propertyPath: maxAgents
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4239891054408888919, guid: 20fff83d3fb568d42855163d1f50b788,
+        type: 3}
       propertyPath: spawnPoints.Array.size
       value: 5
       objectReference: {fileID: 0}

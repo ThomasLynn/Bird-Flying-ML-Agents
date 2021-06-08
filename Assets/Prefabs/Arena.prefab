@@ -106,7 +106,7 @@ MonoBehaviour:
   - {fileID: 4911357066158768382}
   - {fileID: 2742954336283460538}
   - {fileID: 4652749493188625700}
-  maxAgents: 10
+  maxAgents: 15
   loop: 1
 --- !u!1 &9175167638366405318
 GameObject:

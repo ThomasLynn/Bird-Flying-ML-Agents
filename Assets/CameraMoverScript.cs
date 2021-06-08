@@ -9,6 +9,7 @@ public class CameraMoverScript : MonoBehaviour
     public List<Quaternion> rotations;
     public List<int> target;
     public bool follow;
+    public int startingPos;
 
     [HideInInspector]
     public int birdTarget = -1;
@@ -21,8 +22,10 @@ public class CameraMoverScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        targetPosition = transform.position;
-        targetRotation = transform.rotation;
+        targetPosition = positions[startingPos];
+        targetRotation = rotations[startingPos];
+        transform.position = targetPosition;
+        transform.rotation = targetRotation;
     }
 
     // Update is called once per frame
