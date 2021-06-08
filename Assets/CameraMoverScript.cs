@@ -7,6 +7,7 @@ public class CameraMoverScript : MonoBehaviour
 
     public List<Vector3> positions;
     public List<Quaternion> rotations;
+    public bool follow;
 
     [HideInInspector]
     public int birdTarget = -1;
@@ -71,7 +72,9 @@ public class CameraMoverScript : MonoBehaviour
             rotSpeed = Quaternion.Angle(transform.rotation, targetRotation);
             birdTarget = 2;
         }
-        transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * 2 * Time.deltaTime);
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotSpeed * 2 * Time.deltaTime);
+        if (follow) {
+            transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * 2 * Time.deltaTime);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotSpeed * 2 * Time.deltaTime);
+        }
     }
 }
