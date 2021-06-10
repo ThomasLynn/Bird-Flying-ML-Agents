@@ -175,7 +175,6 @@ public class BirdAgent : Unity.MLAgents.Agent
     private float RescaleValue(float value, float minValue, float maxValue, bool useAtan)
     {
         float val = (value - minValue) / (maxValue - minValue);
-        //print(val);
         if (useAtan)
         {
             return Mathf.Atan(val) / (Mathf.PI/2f);
