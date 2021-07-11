@@ -40,7 +40,6 @@ public class CameraMoverScript : MonoBehaviour
         {
             targetPosition = positions[0];
             targetRotation = rotations[0];
-            birdTarget = target[0];
             moveSpeed = (transform.position - targetPosition).magnitude;
             rotSpeed = Quaternion.Angle(transform.rotation, targetRotation);
             //birdTarget = -1;
@@ -49,7 +48,6 @@ public class CameraMoverScript : MonoBehaviour
         {
             targetPosition = positions[1];
             targetRotation = rotations[1];
-            birdTarget = target[1];
             moveSpeed = (transform.position - targetPosition).magnitude;
             rotSpeed = Quaternion.Angle(transform.rotation, targetRotation);
             //birdTarget = 1;
@@ -58,7 +56,6 @@ public class CameraMoverScript : MonoBehaviour
         {
             targetPosition = positions[2];
             targetRotation = rotations[2];
-            birdTarget = target[2];
             moveSpeed = (transform.position - targetPosition).magnitude;
             rotSpeed = Quaternion.Angle(transform.rotation, targetRotation);
             //birdTarget = 1;
@@ -67,7 +64,6 @@ public class CameraMoverScript : MonoBehaviour
         {
             targetPosition = positions[3];
             targetRotation = rotations[3];
-            birdTarget = target[3];
             moveSpeed = (transform.position - targetPosition).magnitude;
             rotSpeed = Quaternion.Angle(transform.rotation, targetRotation);
             //birdTarget = 0;
@@ -76,7 +72,6 @@ public class CameraMoverScript : MonoBehaviour
         {
             targetPosition = positions[4];
             targetRotation = rotations[4];
-            birdTarget = target[4];
             moveSpeed = (transform.position - targetPosition).magnitude;
             rotSpeed = Quaternion.Angle(transform.rotation, targetRotation);
             //birdTarget = 2;
@@ -85,7 +80,6 @@ public class CameraMoverScript : MonoBehaviour
         {
             targetPosition = positions[5];
             targetRotation = rotations[5];
-            birdTarget = target[5];
             moveSpeed = (transform.position - targetPosition).magnitude;
             rotSpeed = Quaternion.Angle(transform.rotation, targetRotation);
             //birdTarget = 2;

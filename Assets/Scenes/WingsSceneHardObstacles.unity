@@ -124,12 +124,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!4 &208476947 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1118303295115590389, guid: 97d739b414b96014dae3635c6ee8ab57,
-    type: 3}
-  m_PrefabInstance: {fileID: 1374501586}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1374501586
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -142,36 +136,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Arena Hard Variant
       objectReference: {fileID: 0}
-    - target: {fileID: 1387938750367894296, guid: 97d739b414b96014dae3635c6ee8ab57,
-        type: 3}
-      propertyPath: loop
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1387938750367894296, guid: 97d739b414b96014dae3635c6ee8ab57,
-        type: 3}
-      propertyPath: spawnPoints.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1387938750367894296, guid: 97d739b414b96014dae3635c6ee8ab57,
-        type: 3}
-      propertyPath: spawnPoints.Array.data[0]
-      value: 
-      objectReference: {fileID: 1925910115}
-    - target: {fileID: 1387938750367894296, guid: 97d739b414b96014dae3635c6ee8ab57,
-        type: 3}
-      propertyPath: spawnPoints.Array.data[1]
-      value: 
-      objectReference: {fileID: 208476947}
-    - target: {fileID: 1387938750367894296, guid: 97d739b414b96014dae3635c6ee8ab57,
-        type: 3}
-      propertyPath: spawnPoints.Array.data[2]
-      value: 
-      objectReference: {fileID: 1703433546}
-    - target: {fileID: 1387938750367894296, guid: 97d739b414b96014dae3635c6ee8ab57,
-        type: 3}
-      propertyPath: spawnPoints.Array.data[4]
-      value: 
-      objectReference: {fileID: 1751586923}
     - target: {fileID: 7767794658703504954, guid: 97d739b414b96014dae3635c6ee8ab57,
         type: 3}
       propertyPath: m_RootOrder
@@ -322,24 +286,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -48.6, z: 0}
---- !u!4 &1703433546 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8218033044793537317, guid: 97d739b414b96014dae3635c6ee8ab57,
-    type: 3}
-  m_PrefabInstance: {fileID: 1374501586}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &1751586923 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7567190320139172971, guid: 97d739b414b96014dae3635c6ee8ab57,
-    type: 3}
-  m_PrefabInstance: {fileID: 1374501586}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &1925910115 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7907557580937361841, guid: 97d739b414b96014dae3635c6ee8ab57,
-    type: 3}
-  m_PrefabInstance: {fileID: 1374501586}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &660284029439826648
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -414,11 +360,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4987947872745567646, guid: b32a60e014f77224b95ec26f9dfd3404,
         type: 3}
-      propertyPath: startingPos
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4987947872745567646, guid: b32a60e014f77224b95ec26f9dfd3404,
-        type: 3}
       propertyPath: positions.Array.size
       value: 6
       objectReference: {fileID: 0}
@@ -450,7 +391,7 @@ PrefabInstance:
     - target: {fileID: 4987947872745567646, guid: b32a60e014f77224b95ec26f9dfd3404,
         type: 3}
       propertyPath: positions.Array.data[1].y
-      value: 32.8
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 4987947872745567646, guid: b32a60e014f77224b95ec26f9dfd3404,
         type: 3}
@@ -505,7 +446,7 @@ PrefabInstance:
     - target: {fileID: 4987947872745567646, guid: b32a60e014f77224b95ec26f9dfd3404,
         type: 3}
       propertyPath: positions.Array.data[5].x
-      value: 86.9
+      value: 91
       objectReference: {fileID: 0}
     - target: {fileID: 4987947872745567646, guid: b32a60e014f77224b95ec26f9dfd3404,
         type: 3}
@@ -515,7 +456,7 @@ PrefabInstance:
     - target: {fileID: 4987947872745567646, guid: b32a60e014f77224b95ec26f9dfd3404,
         type: 3}
       propertyPath: positions.Array.data[5].z
-      value: -61.5
+      value: -45
       objectReference: {fileID: 0}
     - target: {fileID: 4987947872745567646, guid: b32a60e014f77224b95ec26f9dfd3404,
         type: 3}
